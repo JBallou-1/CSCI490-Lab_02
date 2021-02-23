@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
+    public static final int REQUEST_CODE = 1;
 private Intent i;
 private EditText editText;
 private Button button;
@@ -18,11 +19,13 @@ private Button button;
         setContentView(R.layout.activity_main);
         editText = findViewById(R.id.plain_text_input);
         button = findViewById(R.id.button);
+        i = new Intent(getBaseContext(),SecondActivity.class);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                i = new Intent(getBaseContext(),SecondActivity.class);
-                i.putExtra("user string",editText);
+                String s = editText.getText().toString();
+                i.putExtra("user string",s);
+                startActivityForResult(i,REQUEST_CODE);
             }
         });
     }
